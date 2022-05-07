@@ -1,0 +1,28 @@
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+
+alert icmp any any <> 192.168.0.10 any (msg: "ICMP Packet found"; sid:10000001; )
+
+alert tcp 10.0.0.10 80 -> 10.0.0.10 80 (msg: "LAND attack found"; flags:S; sameip; sid: 5000000; rev:1; )
+
+alert tcp any any -> 10.0.0.10 any (msg: "TCP SYN flood attack found"; flags:S; threshold: type threshold, track by_dst, count 20, seconds 60; sid: 5000001; rev:1; )
+
+alert icmp 10.0.0.10 any -> 192.168.0.0/24 any (msg: "Smurf attack found"; itype: 8; sid: 5000002; rev:1; )
+
+alert udp any any -> 192.168.0.100 any (msg: "UDP flood attack found"; threshold: type threshold, track by_dst, count 10, seconds 60; sid: 5000003; rev:1; )
+
+# Snort Port Scanning detection
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg: "XMAS Tree Scan found"; flags:UPF; sid:1000006; rev:1; )
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg: "FIN Scan found"; flags:F; sid:1000008; rev:1; )
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg: "NULL Scan found"; flags:0; sid: 1000009; rev:1; )
+
+alert udp $EXTERNAL_NET any -> $HOME_NET any (msg: "UDP Scan found"; sid:1000010; rev:1; )
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg: "ACK Scan found"; flags:A; ack:0; sid:1000011; rev:1; )
