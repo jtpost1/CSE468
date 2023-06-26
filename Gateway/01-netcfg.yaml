@@ -1,4 +1,4 @@
-# Jordan Post: This is a configuration file for the gateway machine that will permanently set up the network.
+# Jordan Post: (fixing issue) This is a configuration file for the gateway machine that will permanently set up the network.
 network:
         version: 2
         renderer: networkd
