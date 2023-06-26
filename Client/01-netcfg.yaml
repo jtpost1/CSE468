@@ -1,4 +1,5 @@
-# Jordan Post: This is a configuration file for the client machine so that it can permanently set up the network.
+# Jordan Post: This is a configuration file for the client machine so that it can permanently set up the network
+# This is for the test commit for the skills module assinment (CSE 485)
 network:
         version: 2
         renderer: networkd
